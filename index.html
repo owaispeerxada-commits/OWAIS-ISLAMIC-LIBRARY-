@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073b2d">
+<meta name="description" content="Deen Daily — your daily connection with Islam.">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Deen Daily</title>
+<style>
+:root{--green:#073b2d;--green2:#0d5942;--gold:#d7b35b;--cream:#f8f5ec;--ink:#18352b;--muted:#718078}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(135deg,var(--green),#0b6248);color:#fff;padding:26px 20px 30px;border-radius:0 0 28px 28px}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:850;letter-spacing:2px;font-size:19px}.moon{color:var(--gold);font-size:26px}
+.tag{color:#e8ddbd;font-size:13px;margin-top:5px}.greeting{margin:25px 0 0;font-size:25px;font-weight:750}.date{color:#d9e7df;font-size:13px;margin-top:6px}
+main{max-width:760px;margin:auto;padding:18px 16px 100px}.section-title{font-size:18px;font-weight:800;margin:18px 2px 12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{border:1px solid #e8e0ce;background:white;border-radius:18px;padding:17px 14px;text-align:left;min-height:118px;cursor:pointer;color:var(--ink);box-shadow:0 5px 16px #173a2910}
+.tile .ico{font-size:25px}.tile strong{display:block;margin-top:10px;font-size:15px}.tile small{color:var(--muted)}
+.card{background:#fff;border:1px solid #e8e0ce;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 5px 16px #173a2909}
+.card h3{margin:0 0 10px;font-size:17px}.arabic{font-family:serif;font-size:26px;line-height:1.9;text-align:right;color:var(--green);direction:rtl}
+.translation{line-height:1.7;color:#43564c}.ref{font-size:12px;color:var(--muted);margin-top:8px}
+button.action{background:var(--green);color:white;border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}
+button.secondary{background:#f2ead7;color:var(--green);border:1px solid #e4d5b1}
+.counter{text-align:center;font-size:48px;font-weight:800;color:var(--green);padding:15px}
+.counter-label{text-align:center;color:var(--muted);font-size:13px}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e9e1d1;display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:5}
+nav button{border:0;background:none;color:#617168;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav button span{font-size:20px}nav button.active{color:var(--green);font-weight:800}
+.page{display:none}.page.active{display:block}.back{margin:8px 0 14px;background:none;border:0;color:var(--green);font-weight:800;cursor:pointer}
+.notice{font-size:12px;color:var(--muted);line-height:1.5}.gold{color:var(--gold)}
+.wall{height:145px;border-radius:16px;background:radial-gradient(circle at 80% 20%,#d7b35b55,transparent 35%),linear-gradient(145deg,#073b2d,#0d5942);display:flex;align-items:center;justify-content:center;color:#f5e7bf;text-align:center;font-family:serif;font-size:24px;margin-bottom:10px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}header{padding-left:max(22px,calc((100% - 720px)/2));padding-right:max(22px,calc((100% - 720px)/2))}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top"><div><div class="brand">☾ DEEN DAILY</div><div class="tag">Your daily connection with Islam</div></div><div class="moon">✦</div></div>
+ <div class="greeting">Assalamu Alaikum</div><div class="date" id="today"></div>
+</header>
+<main>
+<section id="home" class="page active">
+ <div class="section-title">Explore your Deen</div>
+ <div class="grid">
+  <button class="tile" onclick="showPage('quran')"><div class="ico">📖</div><strong>Quran Kareem</strong><small>Read selected Surahs</small></button>
+  <button class="tile" onclick="showPage('hadith')"><div class="ico">🌿</div><strong>Daily Hadith</strong><small>A reminder from Sunnah</small></button>
+  <button class="tile" onclick="showPage('dua')"><div class="ico">🤲</div><strong>Daily Dua</strong><small>Beautiful supplications</small></button>
+  <button class="tile" onclick="showPage('tasbeeh')"><div class="ico">📿</div><strong>Digital Tasbeeh</strong><small>Count your dhikr</small></button>
+  <button class="tile" onclick="showPage('stories')"><div class="ico">🕌</div><strong>Islamic Stories</strong><small>Learn and reflect</small></button>
+  <button class="tile" onclick="showPage('wallpapers')"><div class="ico">🌙</div><strong>Islamic Wallpapers</strong><small>Simple shareable designs</small></button>
+ </div>
+ <div class="section-title">Today's reminder</div>
+ <div class="card"><h3>Remember Allah often</h3><div class="translation">Make a little time today for prayer, gratitude, kindness and remembrance of Allah.</div></div>
+ <p class="notice">This starter app is an educational project. Please verify religious text and references with a trusted scholar before publishing.</p>
+</section>
+
+<section id="quran" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Quran Kareem</div>
+ <div class="card"><h3>سُورَةُ الْفَاتِحَةِ</h3>
+ <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</div>
+ <div class="translation">Surah Al-Fatihah — the opening chapter of the Quran.</div><div class="ref">Surah 1 · 7 verses</div></div>
+ <div class="card"><h3>سُورَةُ الْإِخْلَاصِ</h3><div class="arabic">قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</div><div class="translation">Surah Al-Ikhlas — a declaration of the oneness of Allah.</div><div class="ref">Surah 112 · 4 verses</div></div>
+ <p class="notice">For a complete Quran reader, add a verified Quran text source and reviewed translations before release.</p>
+</section>
+
+<section id="hadith" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Daily Hadith</div>
+ <div class="card"><div class="arabic">الدِّينُ النَّصِيحَةُ</div><h3>“The religion is sincere advice.”</h3><div class="translation">A short reminder about sincerity, goodwill and wishing what is good for others.</div><div class="ref">Sahih Muslim 55 · Verify edition/numbering before publication.</div></div>
+ <p class="notice">Hadith numbering can vary by edition. Have the Arabic, translation and reference checked before publishing.</p>
+</section>
+
+<section id="dua" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Daily Dua</div>
+ <div class="card"><h3>For increase in knowledge</h3><div class="arabic">رَبِّ زِدْنِي عِلْمًا</div><div class="translation"><b>Roman:</b> Rabbi zidni ilma.<br><b>Urdu:</b> اے میرے رب! میرے علم میں اضافہ فرما۔</div><div class="ref">Quran · Surah Taha 20:114</div></div>
+ <div class="card"><h3>A beautiful supplication</h3><div class="arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div><div class="translation"><b>Roman:</b> Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina adhaban-nar.<br><b>Urdu:</b> اے ہمارے رب! ہمیں دنیا میں بھلائی عطا فرما اور آخرت میں بھی بھلائی عطا فرما اور ہمیں آگ کے عذاب سے بچا۔</div><div class="ref">Quran · Surah Al-Baqarah 2:201</div></div>
+</section>
+
+<section id="tasbeeh" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Digital Tasbeeh</div>
+ <div class="card"><h3 style="text-align:center">سُبْحَانَ اللّٰهِ</h3><div class="counter" id="count">0</div><div class="counter-label">Your count on this screen</div><div class="row"><button class="action" onclick="increment()">＋ Count</button><button class="action secondary" onclick="resetCount()">Reset</button></div></div>
+ <p class="notice">The counter is a simple aid; it does not set a required number of repetitions.</p>
+</section>
+
+<section id="stories" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Islamic Stories</div>
+ <div class="card"><h3>Stories coming soon</h3><p class="translation">This section will contain carefully researched stories from the Quran and authentic Islamic history, with references.</p></div>
+</section>
+
+<section id="wallpapers" class="page">
+ <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Islamic Wallpapers</div>
+ <div class="card"><div class="wall">سُبْحَانَ اللّٰهِ<br><small style="font-size:13px">Glory be to Allah</small></div><p class="translation">A simple green-and-gold design for your daily reminder.</p><button class="action" onclick="sharePage()">Share app</button></div>
+</section>
+</main>
+<nav>
+ <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
+ <button data-page="quran" onclick="showPage('quran')"><span>📖</span>Quran</button>
+ <button data-page="dua" onclick="showPage('dua')"><span>🤲</span>Dua</button>
+ <button data-page="tasbeeh" onclick="showPage('tasbeeh')"><span>📿</span>Tasbeeh</button>
+</nav>
+<script>
+document.getElementById('today').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(new Date());
+let count=0;
+function increment(){count++;document.getElementById('count').textContent=count}
+function resetCount(){count=0;document.getElementById('count').textContent=count}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0)}
+async function sharePage(){if(navigator.share){try{await navigator.share({title:'Deen Daily',text:'Your daily connection with Islam',url:location.href})}catch(e){}}else{alert('Copy this website link from your browser to share it.')}} 
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body></html>
