@@ -115,4 +115,160 @@ function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.
 async function sharePage(){if(navigator.share){try{await navigator.share({title:'Deen Daily',text:'Your daily connection with Islam',url:location.href})}catch(e){}}else{alert('Copy this website link from your browser to share it.')}} 
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
 </script>
+ 
+<style>
+#full-quran {
+  background: #073d30;
+  color: white;
+  padding: 15px;
+  border-radius: 14px;
+  font-family: Arial, sans-serif;
+}
+#full-quran h2 {text-align:center;color:#e9cc79}
+#quran-search {
+  width:100%;padding:12px;box-sizing:border-box;
+  border-radius:8px;border:0;margin:10px 0;
+}
+.quran-btn {
+  background:#e8cc79;color:#123b2d;border:0;
+  padding:10px;margin:4px;border-radius:7px;
+  font-weight:bold;
+}
+#quran-list {display:grid;grid-template-columns:1fr 1fr}
+#quran-reader {margin-top:15px}
+.q-ayah {
+  background:#105444;padding:14px;margin:10px 0;
+  border-radius:9px;
+}
+.q-ar {
+  font-size:25px;line-height:2.1;text-align:right;
+  direction:rtl;color:#ffe5a0;
+}
+.q-ur {font-size:17px;line-height:1.9;text-align:right}
+</style>
+
+<section id="full-quran">
+  <h2>القرآن الكريم</h2>
+  <h2>QURAN PAK</h2>
+  <input id="quran-search" placeholder="Search Surah..." oninput="searchSurah()">
+
+  <div style="text-align:center">
+    <button class="quran-btn" onclick="loadJuz(1)">Para 1</button>
+    <button class="quran-btn" onclick="loadJuz(2)">Para 2</button>
+    <button class="quran-btn" onclick="loadJuz(3)">Para 3</button>
+    <button class="quran-btn" onclick="loadJuz(4)">Para 4</button>
+    <button class="quran-btn" onclick="loadJuz(5)">Para 5</button>
+    <button class="quran-btn" onclick="loadJuz(6)">Para 6</button>
+    <button class="quran-btn" onclick="loadJuz(7)">Para 7</button>
+    <button class="quran-btn" onclick="loadJuz(8)">Para 8</button>
+    <button class="quran-btn" onclick="loadJuz(9)">Para 9</button>
+    <button class="quran-btn" onclick="loadJuz(10)">Para 10</button>
+    <button class="quran-btn" onclick="loadJuz(11)">Para 11</button>
+    <button class="quran-btn" onclick="loadJuz(12)">Para 12</button>
+    <button class="quran-btn" onclick="loadJuz(13)">Para 13</button>
+    <button class="quran-btn" onclick="loadJuz(14)">Para 14</button>
+    <button class="quran-btn" onclick="loadJuz(15)">Para 15</button>
+    <button class="quran-btn" onclick="loadJuz(16)">Para 16</button>
+    <button class="quran-btn" onclick="loadJuz(17)">Para 17</button>
+    <button class="quran-btn" onclick="loadJuz(18)">Para 18</button>
+    <button class="quran-btn" onclick="loadJuz(19)">Para 19</button>
+    <button class="quran-btn" onclick="loadJuz(20)">Para 20</button>
+    <button class="quran-btn" onclick="loadJuz(21)">Para 21</button>
+    <button class="quran-btn" onclick="loadJuz(22)">Para 22</button>
+    <button class="quran-btn" onclick="loadJuz(23)">Para 23</button>
+    <button class="quran-btn" onclick="loadJuz(24)">Para 24</button>
+    <button class="quran-btn" onclick="loadJuz(25)">Para 25</button>
+    <button class="quran-btn" onclick="loadJuz(26)">Para 26</button>
+    <button class="quran-btn" onclick="loadJuz(27)">Para 27</button>
+    <button class="quran-btn" onclick="loadJuz(28)">Para 28</button>
+    <button class="quran-btn" onclick="loadJuz(29)">Para 29</button>
+    <button class="quran-btn" onclick="loadJuz(30)">Para 30</button>
+  </div>
+
+  <h3>114 Surah</h3>
+  <div id="quran-list">Loading Surah...</div>
+  <div id="quran-reader"></div>
+</section>
+
+<script>
+let allSurahs = [];
+
+async function initQuran() {
+  try {
+    let r = await fetch("https://api.alquran.cloud/v1/surah");
+    let d = await r.json();
+    allSurahs = d.data;
+    showSurahs(allSurahs);
+  } catch(e) {
+    document.getElementById("quran-list").innerText =
+      "Internet connection check karein aur dobara kholein.";
+  }
+}
+
+function showSurahs(list) {
+  document.getElementById("quran-list").innerHTML =
+    list.map(s => `<button class="quran-btn" onclick="loadSurah(${s.number})">${s.number}. ${s.englishName}</button>`).join("");
+}
+
+function searchSurah() {
+  let q = document.getElementById("quran-search").value.toLowerCase();
+  showSurahs(allSurahs.filter(s =>
+    s.englishName.toLowerCase().includes(q) ||
+    s.name.includes(q) ||
+    s.number.toString() === q
+  ));
+}
+
+async function loadSurah(n) {
+  let box = document.getElementById("quran-reader");
+  box.innerHTML = "Quran load ho raha hai...";
+  try {
+    let r = await fetch(
+      `https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,ur.jalandhry`
+    );
+    let d = await r.json();
+    let arabic = d.data[0];
+    let urdu = d.data[1];
+
+    box.innerHTML = `<h2>${arabic.name} - ${arabic.englishName}</h2>` +
+      arabic.ayahs.map((a,i) => `
+        <div class="q-ayah">
+          <div class="q-ar">${a.text} ۞ ${a.numberInSurah}</div>
+          <div class="q-ur">${urdu.ayahs[i].text}</div>
+        </div>
+      `).join("");
+    box.scrollIntoView({behavior:"smooth"});
+  } catch(e) {
+    box.innerText = "Surah load nahi hui. Internet check karein.";
+  }
+}
+
+async function loadJuz(n) {
+  let box = document.getElementById("quran-reader");
+  box.innerHTML = "Para load ho raha hai...";
+  try {
+    let r = await fetch(
+      `https://api.alquran.cloud/v1/juz/${n}/editions/quran-uthmani,ur.jalandhry`
+    );
+    let d = await r.json();
+    let arabic = d.data[0];
+    let urdu = d.data[1];
+
+    box.innerHTML = `<h2>Para ${n}</h2>` +
+      arabic.ayahs.map((a,i) => `
+        <div class="q-ayah">
+          <div class="q-ar">${a.text} ۞</div>
+          <div class="q-ur">${urdu.ayahs[i].text}</div>
+          <small>${a.surah.name} - Ayat ${a.numberInSurah}</small>
+        </div>
+      `).join("");
+    box.scrollIntoView({behavior:"smooth"});
+  } catch(e) {
+    box.innerText = "Para load nahi hua. Internet check karein.";
+  }
+}
+
+initQuran();
+</script>
+ 
 </body></html>
