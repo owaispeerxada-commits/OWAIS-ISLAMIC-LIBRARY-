@@ -1,7 +1,7 @@
 # DEEN DAILY — starter PWA
 
 This is a small working starter website/PWA designed for a green-and-gold Islamic app.
-
+ 
 ## Test it
 1. Extract this ZIP.
 2. Open `index.html` in a browser to preview the layout (some PWA features need hosting).
