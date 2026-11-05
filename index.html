@@ -200,8 +200,9 @@ loadReader(`https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,ur.ja
 }
 
 function loadJuz(n){
+
 loadReader(`https://api.alquran.cloud/v1/juz/${n}/editions/quran-uthmani,ur.jalandhry`,`Para ${n}`);
-}
+
 
 makeParaButtons();
 initQuran();
