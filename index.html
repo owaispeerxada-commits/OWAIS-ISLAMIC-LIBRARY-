@@ -201,7 +201,40 @@ loadReader(`https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,ur.ja
 
 function loadJuz(n){
 
-loadReader(`https://api.alquran.cloud/v1/juz/${n}/editions/quran-uthmani,ur.jalandhry`,`Para ${n}`);
+
+async function loadJuz(n){
+  const box=document.getElementById('quran-reader');
+  box.innerHTML='<p>Para load ho raha hai...</p>';
+
+  try{
+    const [arResponse,urResponse]=await Promise.all([
+      fetch(`https://api.alquran.cloud/v1/juz/${n}/quran-uthmani`),
+      fetch(`https://api.alquran.cloud/v1/juz/${n}/ur.jalandhry`)
+    ]);
+
+    if(!arResponse.ok || !urResponse.ok) throw Error('Network');
+
+    const [ar,ur]=await Promise.all([
+      arResponse.json(),
+      urResponse.json()
+    ]);
+
+    if(ar.code!==200 || ur.code!==200) throw Error('Data');
+
+    box.innerHTML=`<h2>Para ${n}</h2>`+
+      ar.data.ayahs.map((ayah,i)=>`
+        <div class="q-ayah">
+          <div class="q-ar">${ayah.text} ۞</div>
+          <div class="q-ur">${ur.data.ayahs[i]?.text||''}</div>
+          <div class="ref">${ayah.surah.name} · Ayat ${ayah.numberInSurah}</div>
+        </div>
+      `).join('');
+
+  }catch(e){
+    box.textContent='Para load nahi hua. Internet connection check karein.';
+  }
+}
+  
 
 
 makeParaButtons();
