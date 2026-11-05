@@ -1,1 +1,13 @@
 
+{
+  "name": "DEEN DAILY",
+  "short_name": "DEEN DAILY",
+  "description": "Your daily connection with Islam",
+  "start_url": "/OWAIS-ISLAMIC-LIBRARY-/",
+  "scope": "/OWAIS-ISLAMIC-LIBRARY-/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#064e3b"
+}
+install.app}n{
