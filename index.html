@@ -4,271 +4,207 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#073b2d">
-<meta name="description" content="Deen Daily — your daily connection with Islam.">
-<link rel="manifest" href="manifest.webmanifest">
 <title>Deen Daily</title>
 <style>
-:root{--green:#073b2d;--green2:#0d5942;--gold:#d7b35b;--cream:#f8f5ec;--ink:#18352b;--muted:#718078}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{background:linear-gradient(135deg,var(--green),#0b6248);color:#fff;padding:26px 20px 30px;border-radius:0 0 28px 28px}
-.top{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:850;letter-spacing:2px;font-size:19px}.moon{color:var(--gold);font-size:26px}
-.tag{color:#e8ddbd;font-size:13px;margin-top:5px}.greeting{margin:25px 0 0;font-size:25px;font-weight:750}.date{color:#d9e7df;font-size:13px;margin-top:6px}
-main{max-width:760px;margin:auto;padding:18px 16px 100px}.section-title{font-size:18px;font-weight:800;margin:18px 2px 12px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.tile{border:1px solid #e8e0ce;background:white;border-radius:18px;padding:17px 14px;text-align:left;min-height:118px;cursor:pointer;color:var(--ink);box-shadow:0 5px 16px #173a2910}
-.tile .ico{font-size:25px}.tile strong{display:block;margin-top:10px;font-size:15px}.tile small{color:var(--muted)}
-.card{background:#fff;border:1px solid #e8e0ce;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 5px 16px #173a2909}
-.card h3{margin:0 0 10px;font-size:17px}.arabic{font-family:serif;font-size:26px;line-height:1.9;text-align:right;color:var(--green);direction:rtl}
-.translation{line-height:1.7;color:#43564c}.ref{font-size:12px;color:var(--muted);margin-top:8px}
-button.action{background:var(--green);color:white;border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}
-button.secondary{background:#f2ead7;color:var(--green);border:1px solid #e4d5b1}
-.counter{text-align:center;font-size:48px;font-weight:800;color:var(--green);padding:15px}
-.counter-label{text-align:center;color:var(--muted);font-size:13px}
-.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e9e1d1;display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:5}
-nav button{border:0;background:none;color:#617168;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
-nav button span{font-size:20px}nav button.active{color:var(--green);font-weight:800}
-.page{display:none}.page.active{display:block}.back{margin:8px 0 14px;background:none;border:0;color:var(--green);font-weight:800;cursor:pointer}
-.notice{font-size:12px;color:var(--muted);line-height:1.5}.gold{color:var(--gold)}
-.wall{height:145px;border-radius:16px;background:radial-gradient(circle at 80% 20%,#d7b35b55,transparent 35%),linear-gradient(145deg,#073b2d,#0d5942);display:flex;align-items:center;justify-content:center;color:#f5e7bf;text-align:center;font-family:serif;font-size:24px;margin-bottom:10px}
-@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}header{padding-left:max(22px,calc((100% - 720px)/2));padding-right:max(22px,calc((100% - 720px)/2))}}
+:root{--green:#073b2d;--green2:#0d5942;--gold:#e8cc79;--cream:#f8f5ec;--ink:#18352b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,Arial,sans-serif}
+header{background:var(--green);color:white;padding:24px 18px;border-radius:0 0 24px 24px}
+.brand{font-weight:800;letter-spacing:1px}
+.tag{color:#e8ddbd;font-size:13px;margin-top:4px}
+main{max-width:760px;margin:auto;padding:16px 14px 100px}
+.page{display:none}
+.page.active{display:block}
+h1,h2{text-align:center;color:var(--gold)}
+h1{font-size:27px}
+h2{font-size:23px}
+.section-title{font-weight:800;margin:18px 2px 12px}
+.card{background:white;border:1px solid #e8e0ce;border-radius:16px;padding:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{background:white;border:1px solid #e8e0ce;border-radius:15px;padding:18px;text-align:left;color:var(--ink)}
+.action{background:var(--green);color:white;border:0;border-radius:10px;padding:12px 15px}
+.back{border:0;background:none;color:var(--green);font-weight:bold;padding:8px 0}
+#full-quran{background:var(--green);color:white;padding:15px;border-radius:16px}
+#quran-search{width:100%;padding:14px;border:0;border-radius:10px;margin:10px 0;font-size:16px}
+.para-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.quran-btn{background:var(--gold);color:#123b2d;border:0;border-radius:10px;padding:12px 5px;font-size:15px;font-weight:650;min-height:48px}
+#quran-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#quran-reader{margin-top:18px;scroll-margin-top:15px}
+.q-ayah{background:#105444;padding:14px;margin:10px 0;border-radius:10px}
+.q-ar{font-family:serif;font-size:25px;line-height:2;text-align:right;direction:rtl;color:#ffe5a0}
+.q-ur{font-size:17px;line-height:1.9;text-align:right;margin-top:8px;color:white}
+.ref{font-size:12px;color:#e8ddbd;margin-top:8px}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e9e1d1;display:flex;justify-content:space-around;padding:10px 4px;z-index:5}
+nav button{border:0;background:none;color:#617168;font-size:13px;padding:4px}
+nav button.active{color:var(--green);font-weight:800}
+.arabic{font-family:serif;font-size:26px;line-height:1.9;text-align:right;direction:rtl;color:var(--green)}
+.translation{line-height:1.8}
+.notice{font-size:12px;line-height:1.5;color:#dce9e2}
+@media(max-width:380px){.para-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
- <div class="top"><div><div class="brand">☾ DEEN DAILY</div><div class="tag">Your daily connection with Islam</div></div><div class="moon">✦</div></div>
- <div class="greeting">Assalamu Alaikum</div><div class="date" id="today"></div>
+<div class="brand">☾ DEEN DAILY</div>
+<div class="tag">Your daily connection with Islam</div>
+<div style="font-size:23px;margin-top:20px">Assalamu Alaikum</div>
 </header>
 <main>
 <section id="home" class="page active">
- <div class="section-title">Explore your Deen</div>
- <div class="grid">
-  <button class="tile" onclick="showPage('quran')"><div class="ico">📖</div><strong>Quran Kareem</strong><small>Read selected Surahs</small></button>
-  <button class="tile" onclick="showPage('hadith')"><div class="ico">🌿</div><strong>Daily Hadith</strong><small>A reminder from Sunnah</small></button>
-  <button class="tile" onclick="showPage('dua')"><div class="ico">🤲</div><strong>Daily Dua</strong><small>Beautiful supplications</small></button>
-  <button class="tile" onclick="showPage('tasbeeh')"><div class="ico">📿</div><strong>Digital Tasbeeh</strong><small>Count your dhikr</small></button>
-  <button class="tile" onclick="showPage('stories')"><div class="ico">🕌</div><strong>Islamic Stories</strong><small>Learn and reflect</small></button>
-  <button class="tile" onclick="showPage('wallpapers')"><div class="ico">🌙</div><strong>Islamic Wallpapers</strong><small>Simple shareable designs</small></button>
- </div>
- <div class="section-title">Today's reminder</div>
- <div class="card"><h3>Remember Allah often</h3><div class="translation">Make a little time today for prayer, gratitude, kindness and remembrance of Allah.</div></div>
- <p class="notice">This starter app is an educational project. Please verify religious text and references with a trusted scholar before publishing.</p>
- <div class="card">
-  <h3>About the Creator</h3>
-  <div class="translation">
-    My name is PEERXADAOWAIS. I am a student of Islamic education and passionate about sharing authentic Islamic knowledge. I created DEEN DAILY to help people stay connected with Islam through daily Quran, Hadith, Duas and reminders.
-    <br><br>
-    May Allah accept this effort. Ameen.
-  </div>
- </div>
+<div class="section-title">Explore your Deen</div>
+<div class="grid">
+<button class="tile" onclick="showPage('quran')">📖<br><b>Quran Kareem</b><br><small>Read Quran</small></button>
+<button class="tile" onclick="showPage('hadith')">🌿<br><b>Daily Hadith</b></button>
+<button class="tile" onclick="showPage('dua')">🤲<br><b>Daily Dua</b></button>
+<button class="tile" onclick="showPage('tasbeeh')">📿<br><b>Digital Tasbeeh</b></button>
+</div>
+<div class="card">
+<b>About the Creator — PEER OWAIS</b>
+<p class="translation">DEEN DAILY is made to help people stay connected with Quran, Hadith, duas and daily Islamic reminders.</p>
+</div>
 </section>
 
 <section id="quran" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Quran Kareem</div>
- <div class="card"><h3>سُورَةُ الْفَاتِحَةِ</h3>
- <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<br>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ<br>الرَّحْمَٰنِ الرَّحِيمِ<br>مَالِكِ يَوْمِ الدِّينِ<br>إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ<br>اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ<br>صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ</div>
- <div class="translation">Surah Al-Fatihah — the opening chapter of the Quran.</div><div class="ref">Surah 1 · 7 verses</div></div>
- <div class="card"><h3>سُورَةُ الْإِخْلَاصِ</h3><div class="arabic">قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</div><div class="translation">Surah Al-Ikhlas — a declaration of the oneness of Allah.</div><div class="ref">Surah 112 · 4 verses</div></div>
- <p class="notice">For a complete Quran reader, add a verified Quran text source and reviewed translations before release.</p>
+<button class="back" onclick="showPage('home')">← Home</button>
+<div id="full-quran">
+<h1>القرآن الكريم</h1>
+<h2>QURAN PAK</h2>
+<input id="quran-search" placeholder="Search Surah..." oninput="searchSurah()">
+<div class="para-grid" id="para-buttons"></div>
+<h3>114 Surah</h3>
+<div id="quran-list">Surah list load ho rahi hai...</div>
+<div id="quran-reader" aria-live="polite"></div>
+<p class="notice">Quran text and Urdu translation are loaded online. Please verify religious text with a trusted Quran edition.</p>
+</div>
 </section>
 
 <section id="hadith" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Daily Hadith</div>
- <div class="card"><div class="arabic">الدِّينُ النَّصِيحَةُ</div><h3>“The religion is sincere advice.”</h3><div class="translation">A short reminder about sincerity, goodwill and wishing what is good for others.</div><div class="ref">Sahih Muslim 55 · Verify edition/numbering before publication.</div></div>
- <p class="notice">Hadith numbering can vary by edition. Have the Arabic, translation and reference checked before publishing.</p>
+<button class="back" onclick="showPage('home')">← Home</button>
+<div class="card">
+<h3>Daily Hadith</h3>
+<div class="arabic">الدِّينُ النَّصِيحَةُ</div>
+<p class="translation">The religion is sincere advice. Reference: Sahih Muslim 55 (verify edition numbering).</p>
+</div>
 </section>
 
 <section id="dua" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Daily Dua</div>
- <div class="card"><h3>For increase in knowledge</h3><div class="arabic">رَبِّ زِدْنِي عِلْمًا</div><div class="translation"><b>Roman:</b> Rabbi zidni ilma.<br><b>Urdu:</b> اے میرے رب! میرے علم میں اضافہ فرما۔</div><div class="ref">Quran · Surah Taha 20:114</div></div>
- <div class="card"><h3>A beautiful supplication</h3><div class="arabic">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div><div class="translation"><b>Roman:</b> Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina adhaban-nar.<br><b>Urdu:</b> اے ہمارے رب! ہمیں دنیا میں بھلائی عطا فرما اور آخرت میں بھی بھلائی عطا فرما اور ہمیں آگ کے عذاب سے بچا۔</div><div class="ref">Quran · Surah Al-Baqarah 2:201</div></div>
+<button class="back" onclick="showPage('home')">← Home</button>
+<div class="card">
+<h3>For increase in knowledge</h3>
+<div class="arabic">رَبِّ زِدْنِي عِلْمًا</div>
+<p class="translation">Rabbi zidni ilma. اے میرے رب! میرے علم میں اضافہ فرما۔</p>
+</div>
 </section>
 
 <section id="tasbeeh" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Digital Tasbeeh</div>
- <div class="card"><h3 style="text-align:center">سُبْحَانَ اللّٰهِ</h3><div class="counter" id="count">0</div><div class="counter-label">Your count on this screen</div><div class="row"><button class="action" onclick="increment()">＋ Count</button><button class="action secondary" onclick="resetCount()">Reset</button></div></div>
- <p class="notice">The counter is a simple aid; it does not set a required number of repetitions.</p>
-</section>
-
-<section id="stories" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Islamic Stories</div>
- <div class="card"><h3>Stories coming soon</h3><p class="translation">This section will contain carefully researched stories from the Quran and authentic Islamic history, with references.</p></div>
-</section>
-
-<section id="wallpapers" class="page">
- <button class="back" onclick="showPage('home')">← Home</button><div class="section-title">Islamic Wallpapers</div>
- <div class="card"><div class="wall">سُبْحَانَ اللّٰهِ<br><small style="font-size:13px">Glory be to Allah</small></div><p class="translation">A simple green-and-gold design for your daily reminder.</p><button class="action" onclick="sharePage()">Share app</button></div>
+<button class="back" onclick="showPage('home')">← Home</button>
+<div class="card" style="text-align:center">
+<h3>سُبْحَانَ اللّٰهِ</h3>
+<div id="count" style="font-size:48px">0</div>
+<button class="action" onclick="increment()">＋ Count</button>
+<button class="action" onclick="resetCount()">Reset</button>
+</div>
 </section>
 </main>
+
 <nav>
- <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
- <button data-page="quran" onclick="showPage('quran')"><span>📖</span>Quran</button>
- <button data-page="dua" onclick="showPage('dua')"><span>🤲</span>Dua</button>
- <button data-page="tasbeeh" onclick="showPage('tasbeeh')"><span>📿</span>Tasbeeh</button>
+<button class="active" data-page="home" onclick="showPage('home')">⌂<br>Home</button>
+<button data-page="quran" onclick="showPage('quran')">📖<br>Quran</button>
+<button data-page="dua" onclick="showPage('dua')">🤲<br>Dua</button>
+<button data-page="tasbeeh" onclick="showPage('tasbeeh')">📿<br>Tasbeeh</button>
 </nav>
-<script>
-document.getElementById('today').textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(new Date());
-let count=0;
-function increment(){count++;document.getElementById('count').textContent=count}
-function resetCount(){count=0;document.getElementById('count').textContent=count}
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo(0,0)}
-async function sharePage(){if(navigator.share){try{await navigator.share({title:'Deen Daily',text:'Your daily connection with Islam',url:location.href})}catch(e){}}else{alert('Copy this website link from your browser to share it.')}} 
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-</script>
- 
-<style>
-#full-quran {
-  background: #073d30;
-  color: white;
-  padding: 15px;
-  border-radius: 14px;
-  font-family: Arial, sans-serif;
-}
-#full-quran h2 {text-align:center;color:#e9cc79}
-#quran-search {
-  width:100%;padding:12px;box-sizing:border-box;
-  border-radius:8px;border:0;margin:10px 0;
-}
-.quran-btn {
-  background:#e8cc79;color:#123b2d;border:0;
-  padding:10px;margin:4px;border-radius:7px;
-  font-weight:bold;
-}
-#quran-list {display:grid;grid-template-columns:1fr 1fr}
-#quran-reader {margin-top:15px}
-.q-ayah {
-  background:#105444;padding:14px;margin:10px 0;
-  border-radius:9px;
-}
-.q-ar {
-  font-size:25px;line-height:2.1;text-align:right;
-  direction:rtl;color:#ffe5a0;
-}
-.q-ur {font-size:17px;line-height:1.9;text-align:right}
-</style>
-
-<section id="full-quran">
-  <h2>القرآن الكريم</h2>
-  <h2>QURAN PAK</h2>
-  <input id="quran-search" placeholder="Search Surah..." oninput="searchSurah()">
-
-  <div style="text-align:center">
-    <button class="quran-btn" onclick="loadJuz(1)">Para 1</button>
-    <button class="quran-btn" onclick="loadJuz(2)">Para 2</button>
-    <button class="quran-btn" onclick="loadJuz(3)">Para 3</button>
-    <button class="quran-btn" onclick="loadJuz(4)">Para 4</button>
-    <button class="quran-btn" onclick="loadJuz(5)">Para 5</button>
-    <button class="quran-btn" onclick="loadJuz(6)">Para 6</button>
-    <button class="quran-btn" onclick="loadJuz(7)">Para 7</button>
-    <button class="quran-btn" onclick="loadJuz(8)">Para 8</button>
-    <button class="quran-btn" onclick="loadJuz(9)">Para 9</button>
-    <button class="quran-btn" onclick="loadJuz(10)">Para 10</button>
-    <button class="quran-btn" onclick="loadJuz(11)">Para 11</button>
-    <button class="quran-btn" onclick="loadJuz(12)">Para 12</button>
-    <button class="quran-btn" onclick="loadJuz(13)">Para 13</button>
-    <button class="quran-btn" onclick="loadJuz(14)">Para 14</button>
-    <button class="quran-btn" onclick="loadJuz(15)">Para 15</button>
-    <button class="quran-btn" onclick="loadJuz(16)">Para 16</button>
-    <button class="quran-btn" onclick="loadJuz(17)">Para 17</button>
-    <button class="quran-btn" onclick="loadJuz(18)">Para 18</button>
-    <button class="quran-btn" onclick="loadJuz(19)">Para 19</button>
-    <button class="quran-btn" onclick="loadJuz(20)">Para 20</button>
-    <button class="quran-btn" onclick="loadJuz(21)">Para 21</button>
-    <button class="quran-btn" onclick="loadJuz(22)">Para 22</button>
-    <button class="quran-btn" onclick="loadJuz(23)">Para 23</button>
-    <button class="quran-btn" onclick="loadJuz(24)">Para 24</button>
-    <button class="quran-btn" onclick="loadJuz(25)">Para 25</button>
-    <button class="quran-btn" onclick="loadJuz(26)">Para 26</button>
-    <button class="quran-btn" onclick="loadJuz(27)">Para 27</button>
-    <button class="quran-btn" onclick="loadJuz(28)">Para 28</button>
-    <button class="quran-btn" onclick="loadJuz(29)">Para 29</button>
-    <button class="quran-btn" onclick="loadJuz(30)">Para 30</button>
-  </div>
-
-  <h3>114 Surah</h3>
-  <div id="quran-list">Loading Surah...</div>
-  <div id="quran-reader"></div>
-</section>
 
 <script>
-let allSurahs = [];
+let allSurahs=[],count=0;
 
-async function initQuran() {
-  try {
-    let r = await fetch("https://api.alquran.cloud/v1/surah");
-    let d = await r.json();
-    allSurahs = d.data;
-    showSurahs(allSurahs);
-  } catch(e) {
-    document.getElementById("quran-list").innerText =
-      "Internet connection check karein aur dobara kholein.";
-  }
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+window.scrollTo(0,0);
 }
 
-function showSurahs(list) {
-  document.getElementById("quran-list").innerHTML =
-    list.map(s => `<button class="quran-btn" onclick="loadSurah(${s.number})">${s.number}. ${s.englishName}</button>`).join("");
+function increment(){
+document.getElementById('count').textContent=++count;
 }
 
-function searchSurah() {
-  let q = document.getElementById("quran-search").value.toLowerCase();
-  showSurahs(allSurahs.filter(s =>
-    s.englishName.toLowerCase().includes(q) ||
-    s.name.includes(q) ||
-    s.number.toString() === q
-  ));
+function resetCount(){
+count=0;
+document.getElementById('count').textContent='0';
 }
 
-async function loadSurah(n) {
-  let box = document.getElementById("quran-reader");
-  box.innerHTML = "Quran load ho raha hai...";
-  try {
-    let r = await fetch(
-      `https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,ur.jalandhry`
-    );
-    let d = await r.json();
-    let arabic = d.data[0];
-    let urdu = d.data[1];
-
-    box.innerHTML = `<h2>${arabic.name} - ${arabic.englishName}</h2>` +
-      arabic.ayahs.map((a,i) => `
-        <div class="q-ayah">
-          <div class="q-ar">${a.text} ۞ ${a.numberInSurah}</div>
-          <div class="q-ur">${urdu.ayahs[i].text}</div>
-        </div>
-      `).join("");
-    box.scrollIntoView({behavior:"smooth"});
-  } catch(e) {
-    box.innerText = "Surah load nahi hui. Internet check karein.";
-  }
+function makeParaButtons(){
+const box=document.getElementById('para-buttons');
+box.innerHTML='';
+for(let n=1;n<=30;n++){
+const b=document.createElement('button');
+b.type='button';
+b.className='quran-btn';
+b.textContent='Para '+n;
+b.addEventListener('click',()=>loadJuz(n));
+box.appendChild(b);
+}
 }
 
-async function loadJuz(n) {
-  let box = document.getElementById("quran-reader");
-  box.innerHTML = "Para load ho raha hai...";
-  try {
-    let r = await fetch(
-      `https://api.alquran.cloud/v1/juz/${n}/editions/quran-uthmani,ur.jalandhry`
-    );
-    let d = await r.json();
-    let arabic = d.data[0];
-    let urdu = d.data[1];
-
-    box.innerHTML = `<h2>Para ${n}</h2>` +
-      arabic.ayahs.map((a,i) => `
-        <div class="q-ayah">
-          <div class="q-ar">${a.text} ۞</div>
-          <div class="q-ur">${urdu.ayahs[i].text}</div>
-          <small>${a.surah.name} - Ayat ${a.numberInSurah}</small>
-        </div>
-      `).join("");
-    box.scrollIntoView({behavior:"smooth"});
-  } catch(e) {
-    box.innerText = "Para load nahi hua. Internet check karein.";
-  }
+async function initQuran(){
+try{
+const r=await fetch('https://api.alquran.cloud/v1/surah');
+if(!r.ok)throw Error('Network');
+const d=await r.json();
+if(d.code!==200)throw Error('API');
+allSurahs=d.data;
+showSurahs(allSurahs);
+}catch(e){
+document.getElementById('quran-list').textContent='Internet check karein aur dobara kholein.';
+}
 }
 
+function showSurahs(list){
+document.getElementById('quran-list').innerHTML=list.map(s=>
+`<button type="button" class="quran-btn" onclick="loadSurah(${s.number})">${s.number}. ${s.englishName}</button>`
+).join('');
+}
+
+function searchSurah(){
+const q=document.getElementById('quran-search').value.toLowerCase();
+showSurahs(allSurahs.filter(s=>
+s.englishName.toLowerCase().includes(q)||s.name.includes(q)||String(s.number)===q
+));
+}
+
+async function loadReader(url,title){
+const box=document.getElementById('quran-reader');
+box.innerHTML='<p>Quran load ho raha hai...</p>';
+box.scrollIntoView({behavior:'smooth',block:'start'});
+try{
+const r=await fetch(url);
+if(!r.ok)throw Error('Network');
+const d=await r.json();
+if(d.code!==200||!d.data||d.data.length<2)throw Error('Data');
+const ar=d.data[0],ur=d.data[1];
+box.innerHTML=`<h2>${title}</h2>`+ar.ayahs.map((a,i)=>
+`<div class="q-ayah">
+<div class="q-ar">${a.text} ۞ ${a.numberInSurah||''}</div>
+<div class="q-ur">${ur.ayahs[i]?.text||''}</div>
+<div class="ref">${a.surah?.name||ar.name||''} · Ayat ${a.numberInSurah||i+1}</div>
+</div>`
+).join('');
+box.scrollIntoView({behavior:'smooth',block:'start'});
+}catch(e){
+box.textContent='Quran load nahi hua. Internet connection check karke dobara tap karein.';
+}
+}
+
+function loadSurah(n){
+loadReader(`https://api.alquran.cloud/v1/surah/${n}/editions/quran-uthmani,ur.jalandhry`,`Surah ${n}`);
+}
+
+function loadJuz(n){
+loadReader(`https://api.alquran.cloud/v1/juz/${n}/editions/quran-uthmani,ur.jalandhry`,`Para ${n}`);
+}
+
+makeParaButtons();
 initQuran();
 </script>
- 
-</body></html>
+</body>
+</html>
